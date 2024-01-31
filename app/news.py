@@ -5,12 +5,19 @@ import certifi
 import requests
 from bs4 import BeautifulSoup
 import threading
+import configparser
+
+config = configparser.ConfigParser()
+config.read('cfg.ini')
+
+acc = config['login']['acc']
+pwd = config['login']['pwd']
 
 #time title pic content link
 
 ca = certifi.where()
 
-myclient = pymongo.MongoClient('mongodb+srv://andyssvs015:7gHZ4pTmBVLUjMo8@tw-news.mbrlkzb.mongodb.net/', tlsCAFile=ca)
+myclient = pymongo.MongoClient('mongodb+srv://'+acc+':'+pwd+'@tw-news.mbrlkzb.mongodb.net/', tlsCAFile=ca)
 mydb = myclient['tw-news']
 collist = mydb.list_collection_names()
 headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0'}
